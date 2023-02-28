@@ -1,9 +1,14 @@
 -- 1.	Quelles sont les num�ros de commandes adress�es au fournisseur 00120 ? 
 --      Les trier de la plus r�cente � la plus ancienne
-
+SELECT c.NUMCOM ,f.ADRFOUR,c.DATCOM  
+FROM FOURNISSEUR f JOIN COMMANDE c ON f.NUMFOUR =c.NUMFOUR 
+WHERE f.NUMFOUR ='00120'
+ORDER BY c.DATCOM DESC ;
 -- ==============================================================================================
 -- 2.	Afficher les produits ayant un stock inf�rieur ou �gal au stock d'alerte
-
+SELECT a.DESART 
+FROM ARTICLE a
+WHERE a.QTEART<=a.SALART;
 -- ==============================================================================================
 -- 3.	Afficher tous les produits qui sont des pr�-imprim�s. 
 --      Pour chacun d'entre eux, calculer l'�cart entre la quantit� en stock et le seuil d'alerte.
