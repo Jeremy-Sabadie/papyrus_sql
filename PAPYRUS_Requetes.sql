@@ -81,6 +81,12 @@ GROUP BY  f.NOMFOUR
 ORDER BY NbCMD ASC
 -- ==============================================================================================
 -- 12.	Lister les fournisseurs susceptibles de livrer au moins 2 produits
+ SELECT f.NOMFOUR, COUNT(a.REFART)  
+ FROM FOURNISSEUR f JOIN COMMANDE c  ON f.NUMFOUR =c.NUMFOUR 
+ JOIN LIGNE l  ON l.NUMCOM = c.NUMCOM 
+ JOIN ARTICLE a  ON a.REFART  = l.REFART 
+ GROUP  BY f.NOMFOUR 
+ HAVING  COUNT(a.REFART)>2;
 
 -- ==============================================================================================
 -- 13.	Trouver la liste des fournisseurs susceptibles de fournir
