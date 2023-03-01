@@ -32,7 +32,11 @@ ORDER BY  ADRFOUR,NOMFOUR;
 -- 6.	Trouver les fournisseurs susceptibles de fournir le produit I100. 
 --      Afficher le num�ro, la raison sociale du fournisseur et le prix pratiqu�.
 --      Trier les r�sultats du moins cher au plus cher.
-
+SELECT f.NUMFOUR , NOMFOUR , t.PRUTAR 
+from FOURNISSEUR f
+join TARIF t on t.NUMFOUR = f.NUMFOUR 
+join ARTICLE a on t.REFART = a.REFART 
+WHERE a.REFART = 'I100'ORDER by t.PRUTAR ;
  
 -- ==============================================================================================
 -- 7.	Afficher le num�ro et la raison sociale des fournisseurs 
