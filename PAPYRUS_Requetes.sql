@@ -75,7 +75,10 @@ HAVING  sum(l.QTELIG * t.PRUTAR)>1500
 -- 11.	Compter le nombre de commandes pass�es par fournisseur. 
 --      Pour chaque fournisseur, afficher le num�ro du fournisseur, la raison sociale. 
 --      Trier les r�sultats par nombre de commandes d�croissant.
-
+SELECT DISTINCT f.NUMFOUR ,f.NOMFOUR,COUNT(*) AS NbCMD
+FROM FOURNISSEUR f  JOIN COMMANDE c  ON f.NUMFOUR =c.NUMFOUR 
+GROUP BY  f.NOMFOUR
+ORDER BY NbCMD ASC
 -- ==============================================================================================
 -- 12.	Lister les fournisseurs susceptibles de livrer au moins 2 produits
 
