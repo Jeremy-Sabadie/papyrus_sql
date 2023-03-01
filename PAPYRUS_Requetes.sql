@@ -63,7 +63,11 @@ GROUP  BY NUMCOM
 ORDER  BY Total DESC
 -- ==============================================================================================
 -- 9.	Lister les commandes dont le montant est sup�rieur � 1500.
-
+SELECT l.NUMCOM, QTELIG, sum(l.QTELIG * t.PRUTAR) AS Total  
+FROM  LIGNE l JOIN ARTICLE a ON a.REFART =l.REFART 
+JOIN TARIF t ON l.REFART =t.REFART 
+GROUP BY NUMCOM 
+HAVING  sum(l.QTELIG * t.PRUTAR)>1500
 -- ==============================================================================================
 -- 10. Calculer le CA r�alis� avec chaque fournisseur
  
