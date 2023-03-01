@@ -101,6 +101,9 @@ ORDER BY NbCMD ASC
 -- ==============================================================================================
 -- 14.	Le fournisseur 00120 vous informe de ses nouveaux tarifs pour 2008 : ils augmentent tous de 5%. 
 --      Mettre � jour la table tarif suite � cette information.
+UPDATE  TARIF 
+SET PRUART= PRUART *1.05;
+WHERE NUMFOUR= 00120 AND YEAR (DATCOM)='2008';
 
 -- ==============================================================================================
 -- 15.	On vous livre 100 unit�s du produit I105, vous vous empressez de mettre � jour la fiche stock.
