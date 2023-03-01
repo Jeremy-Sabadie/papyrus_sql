@@ -70,7 +70,13 @@ GROUP BY NUMCOM
 HAVING  sum(l.QTELIG * t.PRUTAR)>1500
 -- ==============================================================================================
 -- 10. Calculer le CA r�alis� avec chaque fournisseur
- 
+ /*Q10:SELECT SUM( 
+(SELECT  sum(l.QTELIG *t.PRUTAR) AS Total  
+FROM  LIGNE l JOIN ARTICLE a ON a.REFART =l.REFART 
+JOIN TARIF t ON l.REFART =t.REFART 
+GROUP BY NUMCOM)),f.NOMFOUR 
+FROM FOURNISSEUR f 
+GROUP  BY f.NOMFOUR*/
 -- ==============================================================================================
 -- 11.	Compter le nombre de commandes pass�es par fournisseur. 
 --      Pour chaque fournisseur, afficher le num�ro du fournisseur, la raison sociale. 
