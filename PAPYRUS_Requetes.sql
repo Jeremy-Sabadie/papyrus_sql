@@ -12,15 +12,22 @@ WHERE a.QTEART<=a.SALART;
 -- ==============================================================================================
 -- 3.	Afficher tous les produits qui sont des pr�-imprim�s. 
 --      Pour chacun d'entre eux, calculer l'�cart entre la quantit� en stock et le seuil d'alerte.
-
+SELECT a.DESART,(SELECT a.SALART-a.QTEART FROM ARTICLE a)AS diference
+FROM ARTICLE a
+WHERE a.QTEART LIKE '%Pré-imprimé facture%';
 -- ==============================================================================================
 -- 4.	Calculer le nombre de commandes pass�es en 2007
 --      et le nombre de fournisseurs concern�s.
-
+SELECT COUNT(*)
+FROM COMMANDE c
+WHERE YEAR (c.DATCOM)='2007';
 -- ==============================================================================================
 -- 5.	Quels sont les fournisseurs situ�s dans les d�partements 75, 78, 92 ? 
 --      L'affichage sera effectu� par d�partement croissant puis par ordre alphab�tique
-
+SELECT   NOMFOUR, ADRFOUR  
+FROM FOURNISSEUR
+WHERE ADRFOUR LIKE '%75%' OR ADRFOUR LIKE '%78%'OR ADRFOUR LIKE '%92%'
+ORDER BY  ADRFOUR,NOMFOUR;
 -- ==============================================================================================
 -- 6.	Trouver les fournisseurs susceptibles de fournir le produit I100. 
 --      Afficher le num�ro, la raison sociale du fournisseur et le prix pratiqu�.
