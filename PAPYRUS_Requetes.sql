@@ -41,7 +41,13 @@ WHERE a.REFART = 'I100'ORDER by t.PRUTAR ;
 -- ==============================================================================================
 -- 7.	Afficher le num�ro et la raison sociale des fournisseurs 
 --      auxquels des commandes ont �t� pass�es.
-SELECT  DISTINCT f.NUMFOUR, f.NOMFOUR 
+SELECT  DISTINCT f.NUMFOUR, f.NOMFOUR, (
+    SELECT DISTINCT COUNT(*) AS NbCMD
+FROM  COMMANDE
+WHERE c.NUMFOUR= f.NUMFOUR   
+GROUP BY f.NUMFOUR
+
+) 
 FROM FOURNISSEUR f  JOIN COMMANDE c ON c.NUMFOUR = f.NUMFOUR
 
 -- Si en plus on veut en plus afficher le nombre de commandes
