@@ -109,11 +109,13 @@ ORDER BY NbCMD ASC
 --      Mettre � jour la table tarif suite � cette information.
 UPDATE  TARIF 
 SET PRUART= PRUART *1.05;
-WHERE NUMFOUR= 00120 AND YEAR (DATCOM)='2008';
+WHERE NUMFOUR= '00120' AND DATCOM LIKE '%2008%';
 
 -- ==============================================================================================
 -- 15.	On vous livre 100 unit�s du produit I105, vous vous empressez de mettre � jour la fiche stock.
-
+UPDATE ARTICLE
+SET QTEART = QTEART+100
+WHERE  REFART = 'I105'
 -- ==============================================================================================
  --                                                    END_OF_FILE
 -- ==============================================================================================
