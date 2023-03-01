@@ -43,10 +43,8 @@ WHERE a.REFART = 'I100'ORDER by t.PRUTAR ;
 --      auxquels des commandes ont �t� pass�es.
 SELECT  DISTINCT f.NUMFOUR, f.NOMFOUR, (
     SELECT DISTINCT COUNT(*) AS NbCMD
-FROM  COMMANDE
+FROM  COMMANDE c
 WHERE c.NUMFOUR= f.NUMFOUR   
-GROUP BY f.NUMFOUR
-
 ) 
 FROM FOURNISSEUR f  JOIN COMMANDE c ON c.NUMFOUR = f.NUMFOUR
 
@@ -58,7 +56,11 @@ GROUP BY f.NUMFOUR
 -- 8.	Calculer le total de chaque commande. 
 --      Pour chaque commande, afficher le num�ro de commande, le total
 --      les trier par total d�croissant.
-
+SELECT l.NUMCOM, QTELIG, sum(l.QTELIG * t.PRUTAR) AS Total  
+FROM  LIGNE l JOIN ARTICLE a ON a.REFART =l.REFART 
+JOIN TARIF t ON l.REFART =t.REFART 
+GROUP  BY NUMCOM 
+ORDER  BY Total DESC
 -- ==============================================================================================
 -- 9.	Lister les commandes dont le montant est sup�rieur � 1500.
 
