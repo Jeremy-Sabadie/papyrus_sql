@@ -12,9 +12,9 @@ WHERE a.QTEART<=a.SALART;
 -- ==============================================================================================
 -- 3.	Afficher tous les produits qui sont des pr�-imprim�s. 
 --      Pour chacun d'entre eux, calculer l'�cart entre la quantit� en stock et le seuil d'alerte.
-SELECT a.DESART,(SELECT a.SALART-a.QTEART FROM ARTICLE a)AS diference
-FROM ARTICLE a
-WHERE a.QTEART LIKE '%Pré-imprimé facture%';
+ SELECT *, QTEART -SALART AS ecartAlert
+FROM ARTICLE 
+WHERE CODCAT='PRE'
 -- ==============================================================================================
 -- 4.	Calculer le nombre de commandes pass�es en 2007
 --      et le nombre de fournisseurs concern�s.
