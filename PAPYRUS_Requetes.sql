@@ -25,7 +25,7 @@ WHERE YEAR (c.DATCOM)=2007;
 -- 5.	Quels sont les fournisseurs situ�s dans les d�partements 75, 78, 92 ? 
 --      L'affichage sera effectu� par d�partement croissant puis par ordre alphab�tique
 SELECT *FROM FOURNISSEUR f 
-WHERE ADRFOUR REGEXP '(75|78|92)[0-9]{3}';
+WHERE ADRFOUR REGEXP '(75|78|92)[0-9]{3}'; -- regex.
 -- ==============================================================================================
 -- 6.	Trouver les fournisseurs susceptibles de fournir le produit I100. 
 --      Afficher le num�ro, la raison sociale du fournisseur et le prix pratiqu�.
@@ -51,14 +51,16 @@ SELECT DISTINCT f.NUMFOUR , f.NOMFOUR  ,COUNT(*) AS NbCMD
 FROM FOURNISSEUR f  JOIN COMMANDE c ON f.NUMFOUR =c.NUMFOUR  
 GROUP BY f.NUMFOUR
 -- ==============================================================================================
--- 8.	Calculer le total de chaque commande. 
+-- 8.1	Calculer le total de chaque commande. 
 --      Pour chaque commande, afficher le num�ro de commande, le total
 --      les trier par total d�croissant.
 SELECT l.NUMCOM, QTELIG, sum(l.QTELIG * t.PRUTAR) AS Total  
 FROM  LIGNE l JOIN ARTICLE a ON a.REFART =l.REFART 
 JOIN TARIF t ON l.REFART =t.REFART 
 GROUP  BY NUMCOM 
-ORDER  BY Total DESC
+ORDER  BY Total DESC;
+-- Q8.2 Mettre à jour le total de chaque commande.
+
 -- ==============================================================================================
 -- 9.	Lister les commandes dont le montant est sup�rieur � 1500.
 SELECT l.NUMCOM, QTELIG, sum(l.QTELIG * t.PRUTAR) AS Total  
@@ -68,13 +70,9 @@ GROUP BY NUMCOM
 HAVING  sum(l.QTELIG * t.PRUTAR)>1500
 -- ==============================================================================================
 -- 10. Calculer le CA r�alis� avec chaque fournisseur
- /*Q10:SELECT SUM( 
-(SELECT  sum(l.QTELIG *t.PRUTAR) AS Total  
-FROM  LIGNE l JOIN ARTICLE a ON a.REFART =l.REFART 
-JOIN TARIF t ON l.REFART =t.REFART 
-GROUP BY NUMCOM)),f.NOMFOUR 
-FROM FOURNISSEUR f 
-GROUP  BY f.NOMFOUR*/
+ SELECT NUMFOUR , sum(TOTCOM)
+FROM COMMANDE
+GROUP BY NUMFOUR 
 -- ==============================================================================================
 -- 11.	Compter le nombre de commandes pass�es par fournisseur. 
 --      Pour chaque fournisseur, afficher le num�ro du fournisseur, la raison sociale. 
