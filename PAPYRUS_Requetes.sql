@@ -18,9 +18,9 @@ WHERE CODCAT='PRE'
 -- ==============================================================================================
 -- 4.	Calculer le nombre de commandes pass�es en 2007
 --      et le nombre de fournisseurs concern�s.
-SELECT COUNT(*)
+SELECT COUNT(DISTINCT NUMFOUR)
 FROM COMMANDE c
-WHERE YEAR (c.DATCOM)='2007';
+WHERE YEAR (c.DATCOM)=2007;
 -- ==============================================================================================
 -- 5.	Quels sont les fournisseurs situ�s dans les d�partements 75, 78, 92 ? 
 --      L'affichage sera effectu� par d�partement croissant puis par ordre alphab�tique
