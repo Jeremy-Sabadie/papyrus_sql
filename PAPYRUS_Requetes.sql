@@ -72,15 +72,15 @@ HAVING  sum(l.QTELIG * t.PRUTAR)>1500
 -- 10. Calculer le CA r�alis� avec chaque fournisseur
  SELECT NUMFOUR , sum(TOTCOM)
 FROM COMMANDE
-GROUP BY NUMFOUR 
+GROUP BY NUMFOUR
 -- ==============================================================================================
 -- 11.	Compter le nombre de commandes pass�es par fournisseur. 
 --      Pour chaque fournisseur, afficher le num�ro du fournisseur, la raison sociale. 
 --      Trier les r�sultats par nombre de commandes d�croissant.
 SELECT DISTINCT f.NUMFOUR ,f.NOMFOUR,COUNT(*) AS NbCMD
 FROM FOURNISSEUR f  JOIN COMMANDE c  ON f.NUMFOUR =c.NUMFOUR 
-GROUP BY  f.NOMFOUR
-ORDER BY NbCMD ASC
+GROUP BY f.NUMFOUR, f.NOMFOUR
+ORDER BY COUNT(*) DESC
 -- ==============================================================================================
 -- 12.	Lister les fournisseurs susceptibles de livrer au moins 2 produits
  SELECT f.NOMFOUR, COUNT(a.REFART)  
