@@ -93,12 +93,10 @@ ORDER BY COUNT(*) DESC
 -- ==============================================================================================
 -- 13.	Trouver la liste des fournisseurs susceptibles de fournir
 --      les produits I100 et I105
- SELECT f.NOMFOUR, a.REFART  
- FROM FOURNISSEUR f JOIN COMMANDE c  ON f.NUMFOUR =c.NUMFOUR 
- JOIN LIGNE l  ON l.NUMCOM = c.NUMCOM 
- JOIN ARTICLE a  ON a.REFART  = l.REFART 
- GROUP  BY f.NOMFOUR 
- HAVING a.REFART ='I100'OR a.REFART ='I105';
+ SELECT f.NUMFOUR , f.NOMFOUR 
+from FOURNISSEUR f 
+join TARIF t on f.NUMFOUR = t.NUMFOUR 
+WHERE t.REFART = 'I100' or t.REFART = 'I105'GROUP by f.NUMFOUR;
 
 -- ==============================================================================================
 -- 14.	Le fournisseur 00120 vous informe de ses nouveaux tarifs pour 2008 : ils augmentent tous de 5%. 
