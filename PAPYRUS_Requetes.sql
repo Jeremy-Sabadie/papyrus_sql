@@ -99,11 +99,11 @@ join TARIF t on f.NUMFOUR = t.NUMFOUR
 WHERE t.REFART = 'I100' or t.REFART = 'I105'GROUP by f.NUMFOUR;
 
 -- ==============================================================================================
--- 14.	Le fournisseur 00120 vous informe de ses nouveaux tarifs pour 2008 : ils augmentent tous de 5%. 
+-- 14.	Le fournisseur 00120 vous informe de ses nouveaux tarifs augmentent tous de 5%. 
 --      Mettre � jour la table tarif suite � cette information.
 UPDATE  TARIF 
 SET PRUART= PRUART *1.05;
-WHERE NUMFOUR= '00120' AND DATCOM LIKE '%2008%';
+WHERE NUMFOUR= '00120';
 
 -- ==============================================================================================
 -- 15.	On vous livre 100 unit�s du produit I105, vous vous empressez de mettre � jour la fiche stock.
