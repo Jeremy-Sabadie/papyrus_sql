@@ -110,6 +110,17 @@ WHERE NUMFOUR= '00120';
 UPDATE ARTICLE
 SET QTEART = QTEART+100
 WHERE  REFART = 'I105'
+
+--16: Créer une vue TOTAL_COMMANDE pour calculer le total de chaque commande avec comme colonnes : le numéro de commande, la date de commande, le numéro du fournisseur, la raison sociale du fournisseur, le total de la commande.CREATE OR REPLACE VIEW TOTAL_COMMANDE AS    SELECT NUMCOM, DATCOM, COMMANDE.NUMFOUR, FOURNISSEUR.NOMFOUR,
+CREATE OR REPLACE VIEW TOTAL_COMMANDE ASSELECT NUMCOM, DATCOM, COMMANDE.NUMFOUR, FOURNISSEUR.NOMFOUR,
+(SELECT SUM(LIGNE.QTELIG * TARIF.PRUTAR)            
+FROM LIGNE
+    INNER JOIN COMMANDE c ON LIGNE.NUMCOM = c.NUMCOM 
+    INNER JOIN TARIF ON c.NUMFOUR = TARIF.NUMFOUR AND LIGNE.REFART = TARIF.REFART
+    WHERE LIGNE.NUMCOM = COMMANDE.NUMCOM 
+        ) as TOTCOM
+    FROM COMMANDE
+    INNER JOIN FOURNISSEUR ON COMMANDE.NUMFOUR = FOURNISSEUR.NUMFOUR;
 -- ==============================================================================================
  --                                                    END_OF_FILE
 -- ==============================================================================================
